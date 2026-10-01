@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>You&amp;Na — DJ · Leipzig</title>
+<meta name="description" content="You&Na — House, Deep House, Melodic House, Deep Tech &amp; Tech House DJ from Leipzig. Part of Groovers Fam.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=Instrument+Serif&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #ff4d14;   /* Akzent: Orange */
+    --orange-2: #ff7a1a;
+    --red: #a3260a;
+    --ink: #0a0a0a;
+    --paper: #0a0a0a;
+    --card: #131313;
+    --text: #f4f1ea;
+    --mute: #6d6a63;
+    --line: rgba(255, 77, 20, .35);
+    --pad: clamp(16px, 3vw, 40px);
+    --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--text);
+    font-family: "Archivo", system-ui, sans-serif;
+    font-stretch: 100%;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+
+  .display {
+    font-weight: 900;
+    font-stretch: 125%;
+    text-transform: uppercase;
+    line-height: .8;
+    letter-spacing: -.02em;
+  }
+  .logo {
+    font-family: "Instrument Serif", serif;
+    font-size: 26px;
+    letter-spacing: -.01em;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .logo img { height: 1.6em; width: auto; }
+  .micro { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+  .btn {
+    display: inline-block;
+    background: var(--orange);
+    color: #0a0a0a;
+    padding: 11px 18px;
+    font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    transition: background .2s, transform .2s;
+  }
+  .btn:hover { background: var(--text); color: #0a0a0a; }
+  .btn.light { background: transparent; color: var(--text); box-shadow: inset 0 0 0 1px currentColor; }
+  .btn.light:hover { background: var(--orange); color: #0a0a0a; box-shadow: none; }
+  .pill {
+    display: inline-block;
+    border: 1px solid currentColor;
+    border-radius: 99px;
+    padding: 4px 11px;
+    font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  }
+  .grain::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background-image: var(--grain); opacity: .08; mix-blend-mode: screen;
+  }
+  .star { width: 44px; height: 44px; filter: drop-shadow(0 0 10px rgba(255,77,20,.9)); }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    background: radial-gradient(70% 70% at 55% 40%, #1c1a16, #0a0a0a 70%);
+    color: #fff;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .hero-photo {
+    position: absolute; z-index: -1;
+    top: 0; bottom: 0; left: 50%;
+    width: min(1100px, 100%);
+    transform: translateX(-42%);
+    object-fit: cover; object-position: 50% 30%;
+    height: 100%;
+    filter: grayscale(1) contrast(1.15) brightness(1.1);
+    -webkit-mask-image: radial-gradient(60% 75% at 50% 42%, #000 45%, transparent 100%);
+            mask-image: radial-gradient(60% 75% at 50% 42%, #000 45%, transparent 100%);
+  }
+  .hero-smear {
+    position: absolute; z-index: -1; inset: 0;
+    background: radial-gradient(40% 50% at 0% 100%, rgba(255,77,20,.22), transparent 70%);
+    filter: blur(30px);
+  }
+  .hero-grid {
+    position: absolute; z-index: 0;
+    left: 32%; top: 22%; width: 34%; height: 46%;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 25% 33.33%;
+    -webkit-mask-image: radial-gradient(closest-side, #000 60%, transparent);
+            mask-image: radial-gradient(closest-side, #000 60%, transparent);
+  }
+  .glitch {
+    position: absolute; z-index: 1;
+    backdrop-filter: blur(8px) brightness(1.6);
+    -webkit-backdrop-filter: blur(8px) brightness(1.6);
+    background: rgba(255,77,20,.08);
+    border: 1px solid rgba(255,77,20,.3);
+    animation: drift 6s ease-in-out infinite alternate;
+  }
+  .g1 { left: 44%; top: 30%; width: 8.5%; aspect-ratio: 1; }
+  .g2 { left: 52.5%; top: 37%; width: 6%; aspect-ratio: 1; animation-delay: -2s; }
+  .g3 { left: 40%; top: 50%; width: 5%; aspect-ratio: .8; animation-delay: -4s; }
+  @keyframes drift { to { transform: translate(6px, -8px); } }
+  .hero .star { position: absolute; left: 36%; top: 40%; z-index: 2; animation: twinkle 3s ease-in-out infinite; }
+  @keyframes twinkle { 50% { transform: scale(.7) rotate(20deg); opacity: .7; } }
+
+  .hero-top {
+    position: relative; z-index: 3;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: var(--pad);
+  }
+  .hero-year {
+    color: var(--orange);
+    position: absolute; z-index: 3;
+    right: 34%; top: 14%;
+    font-size: clamp(44px, 7vw, 110px);
+  }
+  .hero-year small { color: var(--text); display: block; line-height: 1.6; font-size: 11px; font-weight: 600; font-stretch: 100%; letter-spacing: .06em; margin-top: 10px; }
+  .hero-name {
+    position: absolute; z-index: 3;
+    left: var(--pad); bottom: var(--pad);
+    font-size: clamp(88px, 17vw, 300px);
+  }
+  .hero-name img { width: clamp(240px, 46vw, 760px); height: auto; filter: drop-shadow(0 10px 40px rgba(0,0,0,.6)); }
+  .hero-side {
+    position: absolute; z-index: 3; color: var(--text);
+    right: var(--pad); top: 46%;
+    display: grid; grid-template-columns: auto auto; gap: 12px 40px; align-items: start;
+    max-width: 440px;
+  }
+  .hero-side p { grid-column: 2; font-size: 12px; line-height: 1.45; opacity: .9; max-width: 220px; text-align: right; justify-self: end; }
+  .hero-scroll {
+    position: absolute; z-index: 3; right: var(--pad); bottom: var(--pad);
+    text-align: right; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; line-height: 1.6;
+  }
+  .hero-scroll b { display: block; font-size: 12px; }
+
+  /* ---------- ABOUT ---------- */
+  .about {
+    position: relative;
+    padding: calc(var(--pad) * 1.5) var(--pad) calc(var(--pad) * 2.5);
+    min-height: 92svh;
+    display: grid;
+    grid-template-columns: 1fr 1.25fr;
+    gap: var(--pad);
+    overflow: hidden;
+  }
+  .blob {
+    position: absolute; left: -12%; bottom: -18%;
+    width: 62vw; max-width: 760px; aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle at 55% 45%, #ffb37a 0 6%, #ff4d14 26%, rgba(163,38,10,.6) 45%, transparent 70%);
+    filter: blur(40px);
+    opacity: .55;
+  }
+  .about-left { position: relative; display: flex; flex-direction: column; justify-content: space-between; }
+  .about-left .year { color: var(--text); font-size: clamp(64px, 10vw, 150px); text-shadow: 0 0 40px rgba(255,77,20,.5); }
+  .about-right { position: relative; padding-top: clamp(40px, 8vh, 90px); }
+  .statement {
+    font-size: clamp(30px, 4.1vw, 64px);
+    font-weight: 500;
+    line-height: 1.02;
+    letter-spacing: -.01em;
+    text-transform: uppercase;
+    margin: 28px 0 40px;
+  }
+  .statement .soft { color: var(--mute); }
+  .inline-thumb {
+    display: inline-block; vertical-align: middle;
+    width: 1.6em; height: 1.15em;
+    margin: -.1em .1em 0;
+    background: #000 url(assets/avatar.jpg) center 30% / cover;
+    position: relative;
+    filter: grayscale(1);
+    box-shadow: 0 0 0 1px var(--orange);
+    transition: transform .3s;
+  }
+  .inline-thumb:hover { transform: rotate(-4deg) scale(1.08); }
+  .inline-thumb::after {
+    content: ""; position: absolute; left: 50%; top: 50%;
+    width: .5em; height: .5em; transform: translate(-50%, -50%);
+    border-radius: 50%; background: #ff4d14 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'><path d='M3.5 2.5l4 2.5-4 2.5z' fill='black'/></svg>") center / 70% no-repeat;
+  }
+  .about-meta { display: grid; grid-template-columns: minmax(0, 260px) 1fr; gap: 32px; align-items: end; }
+  .about-meta p { font-size: 13px; line-height: 1.55; }
+  .about-meta .facts { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+
+  /* ---------- MIXES ---------- */
+  .mixes {
+    position: relative;
+    filter: none;
+    background: #000 url(assets/avatar.jpg) 50% 12% / min(900px, 120%) no-repeat;
+    padding: clamp(160px, 26vw, 340px) var(--pad) clamp(60px, 10vw, 140px);
+  }
+  .mixes::before {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,.1), rgba(0,0,0,.2) 25%, #0a0a0a 55%), linear-gradient(90deg, #000, transparent 30%, transparent 70%, #000); filter: grayscale(1);
+    pointer-events: none;
+  }
+  .card {
+    position: relative;
+    background: var(--card);
+    border: 1px solid #222;
+    max-width: 1180px; margin: 0 auto;
+    padding: clamp(24px, 4vw, 56px);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, .6);
+  }
+  .card-title {
+    position: relative;
+    font-size: clamp(64px, 15.5vw, 210px);
+    text-align: center;
+    margin-bottom: clamp(28px, 4vw, 56px);
+    line-height: .78;
+  }
+  .card-title .pill {
+    position: absolute; left: 0; top: 52%;
+    background: var(--card); color: var(--text);
+    font-stretch: 100%; letter-spacing: .04em;
+  }
+  .card-title .star { position: absolute; left: 47%; top: 30%; width: 7%; height: auto; filter: drop-shadow(0 0 6px rgba(0,0,0,1)) drop-shadow(0 0 14px rgba(255,77,20,1)); }
+  .chrome {
+    position: absolute; right: 13%; top: 18%;
+    width: 9%; aspect-ratio: 1;
+    border-radius: 22%;
+    background: radial-gradient(circle at 30% 25%, #ffe2cc, #ff4d14 35%, #3a0e02 62%, #c43a0e 85%, #ffc39a);
+    transform: rotate(-12deg);
+    box-shadow: inset 0 0 12px rgba(255,255,255,.5);
+  }
+  .tracklist { list-style: none; }
+  .track {
+    display: grid;
+    grid-template-columns: 50px 56px 1fr 180px 100px;
+    align-items: center;
+    gap: 20px;
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: background .2s, color .2s;
+    border-bottom: 1px solid #1f1f1f;
+  }
+  .track:hover, .track.active { background: var(--orange); color: #0a0a0a; }
+  .track:hover .tag, .track.active .tag, .track:hover .num, .track.active .num { color: rgba(0,0,0,.6); }
+  .track .num { font-size: 12px; font-weight: 700; color: var(--mute); }
+  .track:nth-child(-n+2) .num { color: inherit; }
+  .thumb {
+    width: 48px; aspect-ratio: 1;
+    background: url(assets/avatar.jpg) center 30% / cover;
+    background-blend-mode: screen;
+    position: relative;
+  }
+  .thumb { filter: grayscale(1) contrast(1.2); }
+  .thumb.t0, .thumb.t2 { background-color: #000; }
+  .thumb.t1, .thumb.t3 { background-color: #ff4d14; background-blend-mode: multiply; filter: none; }
+  .track.active .thumb::after {
+    content: ""; position: absolute; inset: 0;
+    background: rgba(0,0,0,.45) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><g fill='white'><rect x='4' y='8' width='2' height='6'><animate attributeName='height' values='6;10;4;6' dur='.9s' repeatCount='indefinite'/></rect><rect x='9' y='5' width='2' height='10'><animate attributeName='height' values='10;4;8;10' dur='.7s' repeatCount='indefinite'/></rect><rect x='14' y='7' width='2' height='7'><animate attributeName='height' values='7;10;5;7' dur='.8s' repeatCount='indefinite'/></rect></g></svg>") center / 60% no-repeat;
+  }
+  .track .title { font-size: 13px; font-weight: 800; font-stretch: 112%; text-transform: uppercase; letter-spacing: .01em; }
+  .track:first-child .title { font-size: 16px; }
+  .track .tag { font-size: 10px; color: var(--mute); text-transform: uppercase; letter-spacing: .06em; }
+  .track .date { font-size: 12px; font-variant-numeric: tabular-nums; text-align: right; }
+  .player { margin-top: 28px; height: 120px; background: #1a1a1a; }
+  .player iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .card-cta { text-align: center; margin-top: 32px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+  /* ---------- STAGES ---------- */
+  .stages {
+    position: relative;
+    min-height: 90svh;
+    background:
+      radial-gradient(45% 55% at 8% 100%, rgba(255,179,122,.55) 0, rgba(255,77,20,.35) 30%, transparent 70%),
+      linear-gradient(100deg, #050505 0%, #0d0d0d 60%, #161410 100%);
+    color: var(--text);
+    padding: calc(var(--pad) * 2) var(--pad);
+    display: grid;
+    grid-template-rows: 1fr auto;
+    overflow: hidden;
+  }
+  .stages.grain::after { opacity: .12; }
+  .stages h2 { font-size: clamp(72px, 13vw, 200px); }
+  .stages h2 em { font-style: normal; color: var(--orange); }
+  .stages .star { position: absolute; right: 8%; top: 12%; }
+  .stage-list {
+    display: grid; grid-template-columns: 1fr minmax(0, 620px);
+    gap: 40px; align-items: start; margin-top: 80px;
+  }
+  .stage-list h3 { font-size: 15px; font-weight: 800; text-transform: uppercase; line-height: 1.2; display: flex; align-items: center; gap: 24px; justify-self: end; }
+  .stage-list h3::before { content: ""; width: 120px; height: 1px; background: rgba(255,255,255,.6); }
+  .stage-list ul { list-style: none; }
+  .stage-list li {
+    display: grid; grid-template-columns: 90px 1fr auto; gap: 14px;
+    padding: 6px 0; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,.18);
+  }
+  .stage-list li span:first-child { opacity: .75; font-variant-numeric: tabular-nums; }
+  .stage-list li b { color: var(--orange); font-weight: 800; text-transform: uppercase; }
+  .stage-list li span:last-child { opacity: .75; text-transform: uppercase; font-size: 11px; align-self: center; }
+
+  /* ---------- CLOSER ---------- */
+  .closer {
+    position: relative;
+    min-height: 88svh;
+    background: #000 url(assets/banner.jpg) center / cover;
+    color: var(--text);
+    overflow: hidden;
+    cursor: none;
+  }
+  .closer::before {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.15) 40%, rgba(0,0,0,.75));
+  }
+  .closer .logo { position: absolute; top: var(--pad); right: var(--pad); }
+  .closer .star { position: absolute; top: var(--pad); left: var(--pad); }
+  .closer h2 {
+    position: absolute; right: var(--pad); bottom: calc(var(--pad) * 1.2);
+    font-size: clamp(60px, 11.5vw, 190px);
+    text-align: right;
+  }
+  .cursor-btn {
+    position: absolute; left: 0; top: 0; z-index: 4;
+    width: 130px; height: 130px; border-radius: 50%;
+    background: var(--orange);
+    color: #0a0a0a;
+    display: grid; place-items: center; text-align: center;
+    font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; line-height: 1.3;
+    transform: translate(30vw, 22vh) translate(-50%, -50%);
+    transition: transform .18s ease-out, background .2s;
+    pointer-events: none;
+  }
+  .closer:hover .cursor-btn { background: var(--orange-2); }
+
+  footer {
+    border-top: 1px solid #1c1c1c;
+    display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 24px;
+    padding: calc(var(--pad) * 1.5) var(--pad);
+  }
+  footer .copy small { display: block; font-size: 10px; color: var(--mute); margin-bottom: 4px; }
+  footer .copy b { font-weight: 900; font-stretch: 112%; text-transform: uppercase; font-size: 13px; }
+  footer nav { display: flex; gap: 22px; flex-wrap: wrap; align-items: center; }
+  footer nav a { font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+  footer nav a:hover { color: var(--orange); }
+  footer nav .sep { width: 1px; height: 14px; background: #333; }
+
+  /* reveal */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity .9s ease, transform .9s cubic-bezier(.2,.7,.2,1); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 900px) {
+    .hero-photo { transform: translateX(-50%); width: 140%; }
+    .hero-year { right: var(--pad); top: 12%; }
+    .hero-side { top: auto; bottom: 46%; left: var(--pad); grid-template-columns: 1fr; }
+    .hero-side p { grid-column: 1; text-align: left; justify-self: start; }
+    .hero-grid { left: 20%; width: 60%; }
+    .g1 { left: 38%; width: 16%; } .g2 { left: 54%; width: 11%; } .g3 { left: 30%; width: 9%; }
+    .hero-scroll { display: none; }
+    .about { grid-template-columns: 1fr; }
+    .about-left { order: 2; min-height: 180px; }
+    .about-meta { grid-template-columns: 1fr; }
+    .about-meta .facts { justify-content: flex-start; }
+    .track { grid-template-columns: 30px 44px 1fr; gap: 12px; padding: 10px 6px; }
+    .track .thumb { width: 44px; }
+    .track .tag, .track .date { display: none; }
+    .card-title .pill { position: static; display: inline-block; margin-bottom: 14px; }
+    .stage-list { grid-template-columns: 1fr; margin-top: 48px; }
+    .stage-list h3 { justify-self: start; }
+    .stage-list h3::before { width: 48px; }
+    .stage-list li { grid-template-columns: 74px 1fr; }
+    .stage-list li span:last-child { grid-column: 2; }
+    .closer { cursor: auto; }
+    .cursor-btn { pointer-events: auto; transform: none; left: auto; right: var(--pad); top: 30%; width: 110px; height: 110px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero grain" id="top">
+  <div class="hero-smear"></div>
+  <img class="hero-photo" src="assets/avatar.jpg" alt="Portrait of You&amp;Na">
+  <div class="hero-grid"></div>
+  <div class="glitch g1"></div><div class="glitch g2"></div><div class="glitch g3"></div>
+  <svg class="star" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 0 L55 45 L100 50 L55 55 L50 100 L45 55 L0 50 L45 45 Z" fill="#fff"/><path d="M50 22 L53 47 L78 50 L53 53 L50 78 L47 53 L22 50 L47 47 Z" fill="#fff" transform="rotate(45 50 50)"/></svg>
+
+  <div class="hero-top">
+    <a class="logo" href="#top"><img src="assets/logo-white.png" alt="You&amp;Na"></a>
+    <a class="btn light" href="#booking">Booking</a>
+  </div>
+
+  <div class="hero-year display">20<br>26<small>House · Deep · Melodic<br>Deep Tech · Tech House</small></div>
+
+  <div class="hero-side">
+    <span class="micro">DJ · Leipzig</span>
+    <span class="pill" style="color:var(--orange)">Made for the dancefloor.</span>
+    <p>Warm, melodic sets full of soul — built to move people of all ages.</p>
+  </div>
+
+  <h1 class="hero-name"><img src="assets/logo-heavy-white.png" alt="You&amp;Na"></h1>
+
+  <a class="hero-scroll" href="#about">Scroll down<b>Explore</b></a>
+</header>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="blob"></div>
+  <div class="about-left">
+    <span class="logo" style="font-size:24px"><img src="assets/logo-white.png" alt="You&amp;Na"></span>
+    <div class="year display">20<br>00</div>
+  </div>
+  <div class="about-right reveal">
+    <span class="pill">Part of Groovers Fam Leipzig</span>
+    <p class="statement">
+      <span class="soft">Behind the decks since 2000 — from hip&nbsp;hop roots</span>
+      to a warm, melodic house sound that takes you on a
+      journey, not just a <span style="white-space:nowrap">set. <a class="inline-thumb" href="#mixes" aria-label="Listen to mixes"></a></span>
+    </p>
+    <div class="about-meta">
+      <div>
+        <p>Sometimes relaxed and dreamy, then driving and full of positive energy. As part of the Leipzig collective Groovers Fam, it's about community, creative projects and special moments on the dance floor.</p>
+        <p style="margin-top:22px"><a class="btn" href="#booking">Book me</a></p>
+      </div>
+      <div class="facts">
+        <span class="pill">House</span>
+        <span class="pill">Deep House</span>
+        <span class="pill">Melodic House</span>
+        <span class="pill">Deep Tech</span>
+        <span class="pill">Tech House</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MIXES -->
+<section class="mixes grain" id="mixes">
+  <div class="card reveal">
+    <h2 class="card-title display">
+      <span class="pill">Latest on SoundCloud</span>
+      Mixes
+      <svg class="star" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 0 L54 46 L100 50 L54 54 L50 100 L46 54 L0 50 L46 46 Z" fill="#fff"/></svg>
+      <span class="chrome" aria-hidden="true"></span>
+    </h2>
+    <ol class="tracklist" id="tracklist"></ol>
+    <div class="player"><iframe id="player" title="SoundCloud player" allow="autoplay" loading="lazy"></iframe></div>
+    <div class="card-cta">
+      <a class="btn" href="https://soundcloud.com/youandna" target="_blank" rel="noopener">All mixes on SoundCloud</a>
+      <a class="btn light" href="https://www.youtube.com/@youandna_music" target="_blank" rel="noopener">YouTube</a>
+    </div>
+  </div>
+</section>
+
+<!-- STAGES -->
+<section class="stages grain" id="stages">
+  <div>
+    <h2 class="display reveal">Night<br>has<br><em>come</em></h2>
+    <svg class="star" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 0 L54 46 L100 50 L54 54 L50 100 L46 54 L0 50 L46 46 Z" fill="#fff"/><path d="M50 25 L52 48 L75 50 L52 52 L50 75 L48 52 L25 50 L48 48 Z" fill="#fff" transform="rotate(45 50 50)"/></svg>
+  </div>
+  <div class="stage-list reveal">
+    <h3>Recent<br>stages</h3>
+    <ul>
+      <!-- Neue Gigs einfach oben einfügen: Datum · Name · Ort -->
+      <li><span>09 Aug 26</span><b>Family Rave</b><span>Jena</span></li>
+      <li><span>On air</span><b>Sunshine Live</b><span>Radio set</span></li>
+      <li><span>07 Mar 25</span><b>Radio Electronica</b><span>Jena</span></li>
+      <li><span>Ongoing</span><b>Groovers Fam</b><span>Leipzig</span></li>
+      <li><span>Next</span><b>Your event?</b><span><a href="#booking" style="text-decoration:underline">Get in touch</a></span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- CLOSER -->
+<section class="closer" id="booking">
+  <svg class="star" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 0 L54 46 L100 50 L54 54 L50 100 L46 54 L0 50 L46 46 Z" fill="#fff"/><path d="M50 25 L52 48 L75 50 L52 52 L50 75 L48 52 L25 50 L48 48 Z" fill="#fff" transform="rotate(45 50 50)"/></svg>
+  <span class="logo"><img src="assets/logo-white.png" alt="You&amp;Na"></span>
+  <a class="cursor-btn" id="cursorBtn" href="https://ig.me/m/yn.mp3" target="_blank" rel="noopener">Check<br>availability</a>
+  <h2 class="display">Let's<br>feel the<br><span style="color:var(--orange)">groove</span></h2>
+</section>
+
+<footer>
+  <div class="copy">
+    <small>©2026</small>
+    <b>You&amp;Na — All rights reserved</b>
+  </div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#mixes">Mixes</a>
+    <a href="#stages">Stages</a>
+    <a href="#booking">Booking</a>
+    <span class="sep"></span>
+    <a href="https://soundcloud.com/youandna" target="_blank" rel="noopener">SoundCloud</a>
+    <a href="https://www.youtube.com/@youandna_music" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://www.instagram.com/yn.mp3/" target="_blank" rel="noopener">Instagram</a>
+  </nav>
+</footer>
+
+<script>
+  // Mixes — neue Einträge oben ergänzen (slug = Teil der SoundCloud-URL nach /youandna/)
+  const MIXES = [
+    { slug: "familyrave", title: "Family Rave Jena", tag: "Live set", date: "2026-08-26" },
+    { slug: "sunsetmusic", title: "Deep House Sunset Music Mix", tag: "Deep House", date: "2026-07-22" },
+    { slug: "deephouseset", title: "Deep House Set — Soulful, Groovy & Vocal", tag: "Deep / Vocal House", date: "2026-07-06" },
+    { slug: "sundowner-melodic-house-set", title: "Sundowner — Melodic House Set", tag: "Melodic House", date: "2026-05-25" },
+    { slug: "rejena", title: "Live at Radio Electronica Jena", tag: "Live · Radio", date: "2026-04-08" },
+    { slug: "house-mix-that-keeps-you-grooving", title: "House Mix That Keeps You Grooving", tag: "House", date: "2026-02-03" },
+    { slug: "live-at-sunshine-live-groovy-house-set", title: "Live at Sunshine Live — Groovy House", tag: "Live · Radio", date: "2026-01-05" },
+    { slug: "melodic-house-set-chill-feel-good-beats", title: "Melodic House Set — Chill & Feel-Good", tag: "Melodic House", date: "2026-01-02" },
+  ];
+  const list = document.getElementById("tracklist");
+  const player = document.getElementById("player");
+  const fmt = d => new Date(d).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
+  const embed = slug => "https://w.soundcloud.com/player/?url=" +
+    encodeURIComponent("https://soundcloud.com/youandna/" + slug) +
+    "&color=%23ff4d14&visual=false&show_comments=false&show_reposts=false&hide_related=true";
+
+  MIXES.forEach((m, i) => {
+    const li = document.createElement("li");
+    li.className = "track";
+    li.tabIndex = 0;
+    li.innerHTML = `<span class="num">#${i + 1}</span>
+      <span class="thumb t${i % 4}" style="background-position:${30 + i * 8}% ${20 + (i % 3) * 15}%"></span>
+      <span class="title"></span><span class="tag"></span><span class="date">${fmt(m.date)}</span>`;
+    li.querySelector(".title").textContent = m.title;
+    li.querySelector(".tag").textContent = m.tag;
+    const play = autoplay => {
+      list.querySelectorAll(".track").forEach(t => t.classList.remove("active"));
+      li.classList.add("active");
+      player.src = embed(m.slug) + (autoplay ? "&auto_play=true" : "");
+    };
+    li.addEventListener("click", () => play(true));
+    li.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); play(true); } });
+    list.appendChild(li);
+    if (i === 0) play(false);
+  });
+
+  // Cursor-following booking button
+  const closer = document.querySelector(".closer");
+  const btn = document.getElementById("cursorBtn");
+  const desktop = matchMedia("(min-width: 901px)");
+  closer.addEventListener("mousemove", e => {
+    if (!desktop.matches) return;
+    const r = closer.getBoundingClientRect();
+    btn.style.transform = `translate(${e.clientX - r.left}px, ${e.clientY - r.top}px) translate(-50%, -50%)`;
+  });
+  closer.addEventListener("click", () => { if (desktop.matches) btn.click(); });
+
+  // Reveal on scroll
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .15 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+</script>
+</body>
+</html>
