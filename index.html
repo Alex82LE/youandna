@@ -72,7 +72,12 @@
     content: ""; position: absolute; inset: 0; pointer-events: none;
     background-image: var(--grain); opacity: .08; mix-blend-mode: screen;
   }
-  .star { width: 44px; height: 44px; filter: drop-shadow(0 0 10px rgba(255,77,20,.9)); }
+  .icon { width: 56px; height: 56px; overflow: visible; }
+  .icon .spin { transform-origin: 50px 50px; animation: spin 5s linear infinite; }
+  .icon .run { animation: run 2.2s linear infinite; }
+  .vinyl { filter: drop-shadow(0 6px 18px rgba(0,0,0,.6)); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes run { to { stroke-dashoffset: -120; } }
 
   /* ---------- HERO ---------- */
   .hero {
@@ -121,8 +126,7 @@
   .g2 { left: 52.5%; top: 37%; width: 6%; aspect-ratio: 1; animation-delay: -2s; }
   .g3 { left: 40%; top: 50%; width: 5%; aspect-ratio: .8; animation-delay: -4s; }
   @keyframes drift { to { transform: translate(6px, -8px); } }
-  .hero .star { position: absolute; left: 36%; top: 40%; z-index: 2; animation: twinkle 3s ease-in-out infinite; }
-  @keyframes twinkle { 50% { transform: scale(.7) rotate(20deg); opacity: .7; } }
+  .hero .icon { position: absolute; left: 30%; top: 27%; z-index: 2; width: clamp(80px, 8vw, 120px); height: auto; }
 
   .hero-top {
     position: relative; z-index: 3;
@@ -237,7 +241,7 @@
     background: var(--card); color: var(--text);
     font-stretch: 100%; letter-spacing: .04em;
   }
-  .card-title .star { position: absolute; left: 47%; top: 30%; width: 7%; height: auto; filter: drop-shadow(0 0 6px rgba(0,0,0,1)) drop-shadow(0 0 14px rgba(255,77,20,1)); }
+  .card-title .icon { position: absolute; left: 46%; top: 22%; width: 9%; height: auto; }
   .chrome {
     position: absolute; right: 13%; top: 18%;
     width: 9%; aspect-ratio: 1;
@@ -298,7 +302,7 @@
   .stages.grain::after { opacity: .12; }
   .stages h2 { font-size: clamp(72px, 13vw, 200px); }
   .stages h2 em { font-style: normal; color: var(--orange); }
-  .stages .star { position: absolute; right: 8%; top: 12%; }
+  .stages .icon { position: absolute; right: 8%; top: 12%; width: clamp(80px, 9vw, 140px); height: auto; }
   .stage-list {
     display: grid; grid-template-columns: 1fr minmax(0, 620px);
     gap: 40px; align-items: start; margin-top: 80px;
@@ -328,7 +332,7 @@
     background: linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.15) 40%, rgba(0,0,0,.75));
   }
   .closer .logo { position: absolute; top: var(--pad); right: var(--pad); }
-  .closer .star { position: absolute; top: var(--pad); left: var(--pad); }
+  .closer .icon { position: absolute; top: var(--pad); left: var(--pad); z-index: 1; width: clamp(64px, 6vw, 96px); height: auto; }
   .closer h2 {
     position: absolute; right: var(--pad); bottom: calc(var(--pad) * 1.2);
     font-size: clamp(60px, 11.5vw, 190px);
@@ -372,6 +376,7 @@
     .hero-grid { left: 20%; width: 60%; }
     .g1 { left: 38%; width: 16%; } .g2 { left: 54%; width: 11%; } .g3 { left: 30%; width: 9%; }
     .hero-scroll { display: none; }
+    .hero .icon { left: var(--pad); top: 13%; width: 72px; }
     .about { grid-template-columns: 1fr; }
     .about-left { order: 2; min-height: 180px; }
     .about-meta { grid-template-columns: 1fr; }
@@ -402,7 +407,7 @@
   <img class="hero-photo" src="assets/avatar.jpg" alt="Portrait of You&amp;Na">
   <div class="hero-grid"></div>
   <div class="glitch g1"></div><div class="glitch g2"></div><div class="glitch g3"></div>
-  <svg class="star" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 0 L55 45 L100 50 L55 55 L50 100 L45 55 L0 50 L45 45 Z" fill="#fff"/><path d="M50 22 L53 47 L78 50 L53 53 L50 78 L47 53 L22 50 L47 47 Z" fill="#fff" transform="rotate(45 50 50)"/></svg>
+  <svg class="icon loop" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 50 C38 30 12 30 12 50 C12 70 38 70 50 50 C62 30 88 30 88 50 C88 70 62 70 50 50 Z" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="7"/><path class="run" d="M50 50 C38 30 12 30 12 50 C12 70 38 70 50 50 C62 30 88 30 88 50 C88 70 62 70 50 50 Z" fill="none" stroke="var(--orange)" stroke-width="7" stroke-linecap="round" stroke-dasharray="40 80"/></svg>
 
   <div class="hero-top">
     <a class="logo" href="#top"><img src="assets/logo-white.png" alt="You&amp;Na"></a>
@@ -458,7 +463,7 @@
     <h2 class="card-title display">
       <span class="pill">Latest on SoundCloud</span>
       Mixes
-      <svg class="star" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 0 L54 46 L100 50 L54 54 L50 100 L46 54 L0 50 L46 46 Z" fill="#fff"/></svg>
+      <svg class="icon vinyl" viewBox="0 0 100 100" aria-hidden="true"><g class="spin"><circle cx="50" cy="50" r="46" fill="#151515" stroke="#2a2a2a"/><circle cx="50" cy="50" r="40" fill="none" stroke="#2c2c2c"/><circle cx="50" cy="50" r="33" fill="none" stroke="#2c2c2c"/><circle cx="50" cy="50" r="26" fill="none" stroke="#2c2c2c"/><path d="M50 8 A42 42 0 0 1 86 30" stroke="#f4f1ea" stroke-opacity=".35" stroke-width="2" fill="none"/><circle cx="50" cy="50" r="15" fill="var(--orange)"/><circle cx="50" cy="50" r="2.5" fill="#0a0a0a"/></g></svg>
       <span class="chrome" aria-hidden="true"></span>
     </h2>
     <ol class="tracklist" id="tracklist"></ol>
@@ -474,7 +479,7 @@
 <section class="stages grain" id="stages">
   <div>
     <h2 class="display reveal">Night<br>has<br><em>come</em></h2>
-    <svg class="star" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 0 L54 46 L100 50 L54 54 L50 100 L46 54 L0 50 L46 46 Z" fill="#fff"/><path d="M50 25 L52 48 L75 50 L52 52 L50 75 L48 52 L25 50 L48 48 Z" fill="#fff" transform="rotate(45 50 50)"/></svg>
+    <svg class="icon loop" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 50 C38 30 12 30 12 50 C12 70 38 70 50 50 C62 30 88 30 88 50 C88 70 62 70 50 50 Z" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="7"/><path class="run" d="M50 50 C38 30 12 30 12 50 C12 70 38 70 50 50 C62 30 88 30 88 50 C88 70 62 70 50 50 Z" fill="none" stroke="var(--orange)" stroke-width="7" stroke-linecap="round" stroke-dasharray="40 80"/></svg>
   </div>
   <div class="stage-list reveal">
     <h3>Recent<br>stages</h3>
@@ -491,7 +496,7 @@
 
 <!-- CLOSER -->
 <section class="closer" id="booking">
-  <svg class="star" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 0 L54 46 L100 50 L54 54 L50 100 L46 54 L0 50 L46 46 Z" fill="#fff"/><path d="M50 25 L52 48 L75 50 L52 52 L50 75 L48 52 L25 50 L48 48 Z" fill="#fff" transform="rotate(45 50 50)"/></svg>
+  <svg class="icon vinyl" viewBox="0 0 100 100" aria-hidden="true"><g class="spin"><circle cx="50" cy="50" r="46" fill="#151515" stroke="#2a2a2a"/><circle cx="50" cy="50" r="40" fill="none" stroke="#2c2c2c"/><circle cx="50" cy="50" r="33" fill="none" stroke="#2c2c2c"/><circle cx="50" cy="50" r="26" fill="none" stroke="#2c2c2c"/><path d="M50 8 A42 42 0 0 1 86 30" stroke="#f4f1ea" stroke-opacity=".35" stroke-width="2" fill="none"/><circle cx="50" cy="50" r="15" fill="var(--orange)"/><circle cx="50" cy="50" r="2.5" fill="#0a0a0a"/></g></svg>
   <span class="logo"><img src="assets/logo-white.png" alt="You&amp;Na"></span>
   <a class="cursor-btn" id="cursorBtn" href="https://ig.me/m/yn.mp3" target="_blank" rel="noopener">Check<br>availability</a>
   <h2 class="display">Let's<br>feel the<br><span style="color:var(--orange)">groove</span></h2>
